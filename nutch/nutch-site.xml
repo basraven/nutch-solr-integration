@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<configuration>
+<property>
+ <name>http.agent.name</name>
+ <value>MyBot</value>
+ <description>MUST NOT be empty. The advertised version will have Nutch appended.</description>
+</property>
+<property>
+ <name>http.robots.agents</name>
+ <value>MyBot,*</value>
+ <description>The agent strings we'll look for in robots.txt files,
+ comma-separated, in decreasing order of precedence. You should
+ put the value of http.agent.name as the first agent name, and keep the
+ default * at the end of the list. E.g.: BlurflDev,Blurfl,*. If you don't, your logfile will be full of warnings.
+ </description>
+</property>
+<property>
+ <name>fetcher.store.content</name>
+ <value>true</value>
+ <description>If true, fetcher will store content. Helpful on the getting-started stage, as you can recover failed steps, but may cause performance problems on larger crawls.</description>
+</property>
+
+<property>
+ <name>fetcher.max.crawl.delay</name>
+ <value>-1</value>
+ <description>
+ If the Crawl-Delay in robots.txt is set to greater than this value (in
+ seconds) then the fetcher will skip this page, generating an error report. If set to -1 the fetcher will never skip such pages and will wait the amount of time retrieved from robots.txt Crawl-Delay, however long that might be.
+ </description>
+</property>
+
+
+<property>
+    <name>db.url.filters</name>
+    <value>true</value>
+    <description>Filter urls when updating crawldb</description>
+</property>
+
+<property>
+    <name>generator.url.filters</name>
+    <value>true</value>
+    <description>Filter urls when generating urls</description>
+</property>
+
+<!-- Applicable plugins-->
+ <property>
+ <name>plugin.includes</name>
+ <value>protocol-http|protocol-httpclient|urlfilter-regex|parse-(html|tika|metatags)|index-(basic|anchor|metadata)|query-(basic|site|url)|response-(json|xml)|summary-basic|scoring-opic|indexer-solr|urlnormalizer-(pass|regex|basic)</value>
+<description> At the very least, I needed to add the parse-html, urlfilter-regex, and the indexer-solr.
+</description>
+ </property>
+</configuration>
