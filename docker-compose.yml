@@ -11,7 +11,7 @@ services:
       - solr-precreate
       - mycore
   nutch:
-    image: "apache/nutch:release-1.15"
+    image: "apache/nutch:release-1.16"
     links:
       - solr
     environment: 
