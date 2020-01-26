@@ -14,8 +14,5 @@
 # for a more extensive coverage use the urlfilter-suffix plugin
 -(?i)\.(gif|jpg|png|ico|css|sit|eps|wmf|zip|ppt|mpg|xls|gz|rpm|tgz|mov|exe|jpeg|bmp|svg|js)$
 
-# accept http://nutch.apache.org
-+^https?://([a-z0-9-]+\.)*nutch\.apache\.org/
-
-# deny anything else
--.
+# accept anything else
++.
