@@ -19,9 +19,9 @@ services:
     working_dir: /root/nutch
     command: '/root/nutch/bin/crawl -i -D solr.server.url=http://solr:8983/solr/mycore -s urls crawl 10'
     volumes:
-        - ./nutch/index-writers.xml:/root/nutch/conf/index-writers.xml
-        - ./nutch/nutch-site.xml:/root/nutch/conf/nutch-site.xml
-        - ./nutch/regex-urlfilter.txt:/root/nutch/conf/regex-urlfilter.txt
-        - ./nutch/seed.txt:/root/nutch/urls/seed.txt
+        - ./nutch/conf/index-writers.xml:/root/nutch/conf/index-writers.xml
+        - ./nutch/conf/nutch-site.xml:/root/nutch/conf/nutch-site.xml
+        - ./nutch/conf/regex-urlfilter.txt:/root/nutch/conf/regex-urlfilter.txt
+        - ./nutch/urls/seed.txt:/root/nutch/urls/seed.txt
 # volumes:
 #   data:
