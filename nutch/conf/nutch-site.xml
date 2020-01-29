@@ -3,13 +3,13 @@
 	
 	<property>
 		<name>http.agent.name</name>
-		<value>MyBot</value>
+		<value>My super awesome crawler</value>
 		<description>MUST NOT be empty. The advertised version will have Nutch appended.</description>
 	</property>
 
 	<property>
 		<name>http.robots.agents</name>
-		<value>MyBot,*</value>
+		<value>My super awesome crawler,*</value>
 		<description>The agent strings we'll look for in robots.txt files,
 			comma-separated, in decreasing order of precedence. You should
 			put the value of http.agent.name as the first agent name, and keep the
