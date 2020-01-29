@@ -4,8 +4,8 @@ services:
     image: "solr:7.3.1"
     ports:
      - "8983:8983"
-    # volumes:
-      # - data:/opt/solr/server/solr/mycores
+    volumes:
+      - ./solr/conf/solr-mapping.xml:/opt/solr/conf/schema.xml
     entrypoint:
       - docker-entrypoint.sh
       - solr-precreate
@@ -23,5 +23,3 @@ services:
         - ./nutch/conf/nutch-site.xml:/root/nutch/conf/nutch-site.xml
         - ./nutch/conf/regex-urlfilter.txt:/root/nutch/conf/regex-urlfilter.txt
         - ./nutch/urls/seed.txt:/root/nutch/urls/seed.txt
-# volumes:
-#   data:
