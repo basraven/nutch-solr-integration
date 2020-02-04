@@ -1,6 +1,7 @@
 version: '3.3'
 services:
   solr:
+    #build: solr/
     image: "solr:7.3.1"
     ports:
      - "8983:8983"
