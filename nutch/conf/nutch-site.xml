@@ -10,16 +10,42 @@
 	<property>
 		<name>http.robots.agents</name>
 		<value>My super awesome crawler,*</value>
-		<description>The agent strings we'll look for in robots.txt files,
-			comma-separated, in decreasing order of precedence. You should
-			put the value of http.agent.name as the first agent name, and keep the
-			default * at the end of the list. E.g.: BlurflDev,Blurfl,*. If you don't, your logfile will be full of warnings.
+		<description>The agent strings we'll look for in robots.txt files, comma-separated, in decreasing order of precedence. You should
+			put the value of http.agent.name as the first agent name, and keep the default * at the end of the list. E.g.: BlurflDev,Blurfl,*. If you don't,
+            your logfile will be full of warnings.
 		</description>
 	</property>
+    
+    <property>
+      <name>http.agent.description</name>
+      <value></value>
+      <description>Further description of our bot- this text is used in
+      the User-Agent header.  It appears in parenthesis after the agent name.
+      </description>
+    </property>
+    
+    <property>
+      <name>http.agent.url</name>
+      <value></value>
+      <description>A URL to advertise in the User-Agent header.  This will
+       appear in parenthesis after the agent name. Custom dictates that this
+       should be a URL of a page explaining the purpose and behavior of this
+       crawler.
+      </description>
+    </property>
+    
+    <property>
+      <name>http.agent.email</name>
+      <value></value>
+      <description>An email address to advertise in the HTTP 'From' request
+       header and User-Agent header. A good practice is to mangle this
+       address (e.g. 'info at example dot com') to avoid spamming.
+      </description>
+    </property>
 	
 	<property>
 		<name>fetcher.store.content</name>
-		<value>true</value>
+		<value>false</value>
 		<description>If true, fetcher will store content. Helpful on the getting-started stage, as you can recover failed steps, but may cause performance problems on larger crawls.</description>
 	</property>
 
@@ -27,10 +53,53 @@
 		<name>fetcher.max.crawl.delay</name>
 		<value>-1</value>
 		<description>
-			If the Crawl-Delay in robots.txt is set to greater than this value (in
-			seconds) then the fetcher will skip this page, generating an error report. If set to -1 the fetcher will never skip such pages and will wait the amount of time retrieved from robots.txt Crawl-Delay, however long that might be.
+			If the Crawl-Delay in robots.txt is set to greater than this value (in seconds) then the fetcher will skip this page, generating an error report.
+            If set to -1 the fetcher will never skip such pages and will wait the amount of time retrieved from robots.txt Crawl-Delay, however long that
+            might be.
 		</description>
 	</property>
+    
+    <property>
+      <name>fetcher.server.delay</name>
+      <value>5.0</value>
+      <description>The number of seconds the fetcher will delay between
+       successive requests to the same server. Note that this might get
+       overridden by a Crawl-Delay from a robots.txt and is used ONLY if
+       fetcher.threads.per.queue is set to 1.
+       </description>
+    </property>
+    
+    <property>
+      <name>fetcher.server.min.delay</name>
+      <value>5.0</value>
+      <description>The minimum number of seconds the fetcher will delay between
+      successive requests to the same server. This value is applicable ONLY
+      if fetcher.threads.per.queue is greater than 1 (i.e. the host blocking
+      is turned off).</description>
+    </property>
+    
+    <property>
+      <name>fetcher.threads.fetch</name>
+      <value>10</value>
+      <description>The number of FetcherThreads the fetcher should use.
+      This is also determines the maximum number of requests that are
+      made at once (each FetcherThread handles one connection). The total
+      number of threads running in distributed mode will be the number of
+      fetcher threads * number of nodes as fetcher has one map task per node.
+      </description>
+    </property>
+    
+    <property>
+      <name>fetcher.threads.per.queue</name>
+      <value>1</value>
+      <description>This number is the maximum number of threads that
+        should be allowed to access a queue at one time. Setting it to
+        a value > 1 will cause the Crawl-Delay value from robots.txt to
+        be ignored and the value of fetcher.server.min.delay to be used
+        as a delay between successive requests to the same server instead
+        of fetcher.server.delay.
+       </description>
+    </property>
 
 	<property>
 		<name>db.url.filters</name>
@@ -51,5 +120,31 @@
 		<description> At the very least, I needed to add the parse-html, urlfilter-regex, and the indexer-solr.
 		</description>
 	</property>
+    
+    <property>
+      <name>generate.max.count</name>
+      <value>10000</value>
+      <description>The maximum number of urls in a single fetchlist.  -1 if unlimited. The urls are counted according to the value of the parameter generate.count.mode.
+      </description>
+    </property>
+    
+    <property>
+      <name>db.max.outlinks.per.page</name>
+      <value>-1</value>
+      <description>The maximum number of outlinks that we'll process for a page.
+      If this value is nonnegative (>=0), at most db.max.outlinks.per.page outlinks
+      will be processed for a page; otherwise, all outlinks will be processed.
+      </description>
+    </property>
 	
+    <property>
+      <name>db.preserve.backup</name>
+      <value>true</value>
+      <description>If true, updatedb will keep a backup of the previous CrawlDB
+      version in the old directory. In case of disaster, one can rename old to
+      current and restore the CrawlDB to its previous state.
+      </description>
+    </property>
+    
+    
 </configuration>
